@@ -276,3 +276,17 @@ end
 Then /^show me the page$/ do
   save_and_open_page
 end
+
+# customed
+
+Then(/^I should see "(.*?)" or "(.*?)"$/) do |arg1, arg2|
+  pending # express the regexp above with the code you wish you had
+  #steps %Q{
+  #  When I #{uncheck}check "#{rating}"
+  #}
+end
+
+Then(/^I should see "(.*?)" and "(.*?)"$/) do |arg1, arg2|
+  pending # express the regexp above with the code you wish you had
+end
+
