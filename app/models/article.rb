@@ -466,4 +466,19 @@ class Article < Content
     to = to - 1 # pull off 1 second so we don't overlap onto the next day
     return from..to
   end
+
+  def merge_with(target_id)
+    begin
+      target_article = Article.find(target_id)
+    rescue ActiveRecord::RecordNotFound
+      return false
+    end
+    self.body += target_article.body
+    self.comments += target_article.comments
+    self.save
+    Article.uncached do
+      target_article = Article.destroy(target_id)
+    end
+    return true
+  end
 end

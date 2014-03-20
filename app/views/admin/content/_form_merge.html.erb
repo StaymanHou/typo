@@ -1,0 +1,16 @@
+<div class='editor-left'>
+  <%= form_tag(content_merge_path(@article.id), :id => "merge_form", :class => 'form-horizontal', :role => 'form') do %>
+    <h3><%= _("Merge Articles") %></h3>
+    <div class='form-group'>
+      <%= label_tag 'merge_with', 'Article ID', :class => 'sol-sm-1 control-label' %>
+      <div class="col-sm-10">
+        <%= number_field_tag 'merge_with', nil, :class => 'form-control' %>
+      </div>
+    </div>  
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <%= submit_tag "Merge" %>
+      </div>
+    </div>
+  <% end %>
+</div>

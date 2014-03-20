@@ -4,3 +4,6 @@
   <%= render :partial => "form" %>
 
 <% end %>
+
+<%= render :partial => "form_merge" if params[:controller] == "admin/content" and params[:action] == "edit" %>
+
