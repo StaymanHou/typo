@@ -71,6 +71,21 @@ class Article < Content
     end
   end
 
+  def merge_with(target_id)
+    begin
+      target_article = Article.find(target_id)
+    rescue ActiveRecord::RecordNotFound
+      return false
+    end
+    self.body += target_article.body
+    self.comments += target_article.comments
+    self.save
+    Article.uncached do
+      target_article = Article.destroy(target_id)
+    end
+    return true
+  end
+
   def set_permalink
     return if self.state == 'draft'
     self.permalink = self.title.to_permalink if self.permalink.nil? or self.permalink.empty?
@@ -467,18 +482,4 @@ class Article < Content
     return from..to
   end
 
-  def merge_with(target_id)
-    begin
-      target_article = Article.find(target_id)
-    rescue ActiveRecord::RecordNotFound
-      return false
-    end
-    self.body += target_article.body
-    self.comments += target_article.comments
-    self.save
-    Article.uncached do
-      target_article = Article.destroy(target_id)
-    end
-    return true
-  end
 end

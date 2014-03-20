@@ -280,13 +280,18 @@ end
 # customed
 
 Then(/^I should see "(.*?)" or "(.*?)"$/) do |arg1, arg2|
-  pending # express the regexp above with the code you wish you had
+  # express the regexp above with the code you wish you had
   #steps %Q{
   #  When I #{uncheck}check "#{rating}"
   #}
+  pending
 end
 
 Then(/^I should see "(.*?)" and "(.*?)"$/) do |arg1, arg2|
-  pending # express the regexp above with the code you wish you had
+  # express the regexp above with the code you wish you had
+  steps %Q{
+    Then I should see "#{arg1}"
+    And I should see "#{arg2}"
+  }
 end
 
